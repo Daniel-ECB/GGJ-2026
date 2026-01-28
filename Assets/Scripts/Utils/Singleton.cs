@@ -15,7 +15,8 @@ namespace GGJ2026.Core.Utils
             {
                 if (_instance == null)
                 {
-                    Debug.LogWarning($"[Singleton<{typeof(T).Name}>] Instance is null. Make sure the singleton is present in the scene.");
+                    Debug.LogWarning($"[Singleton<{typeof(T).Name}>] Instance is null. Creating one but instead make sure the singleton is present in the scene.");
+                    SetInstance();
                 }
 
                 return _instance;
@@ -43,6 +44,17 @@ namespace GGJ2026.Core.Utils
             if (_instance == this)
             {
                 _instance = null;
+            }
+        }
+
+        private static void SetInstance()
+        {
+            _instance = FindFirstObjectByType<T>();
+
+            if (_instance == null)
+            {
+                GameObject singletonObject = new GameObject(typeof(T).Name);
+                _instance = singletonObject.AddComponent<T>();
             }
         }
     }
