@@ -9,12 +9,41 @@ namespace GGJ2026.Troupe
         private float _horizontalMoveSpeed = 5.0f;
         [SerializeField]
         private float _forwardMoveSpeed = 1.5f;
+        [SerializeField]
+        private float _halfTrackWidth = 3.0f;
+
+        [SerializeField]
+        private TroupeUnit _leadingUnit = default;
+        [SerializeField]
+        private TroupeUnit[] _troupeUnits = default;
+
+        private Transform _cachedTransform;
+
+        private void Awake()
+        {
+            _cachedTransform = transform;
+        }
 
         private void Update()
         {
             float inputX = Input.InputManager.Instance.HorizontalAxis;
-            Vector3 movement = (Vector3.right * (inputX * _horizontalMoveSpeed) + Vector3.forward * _forwardMoveSpeed) * Time.deltaTime;
-            transform.Translate(movement, Space.Self);
+            MoveTroupe();
+            MoveLeadingUnit(inputX);
+        }
+
+        private void MoveTroupe()
+        {
+            Vector3 movement = (Vector3.forward * _forwardMoveSpeed) * Time.deltaTime;
+            _cachedTransform.Translate(movement, Space.Self);
+        }
+
+        private void MoveLeadingUnit(float inputX)
+        {
+            Transform t = _leadingUnit.transform;
+            Vector3 localPos = t.localPosition;
+            localPos.x += inputX * _horizontalMoveSpeed * Time.deltaTime;
+            localPos.x = Mathf.Clamp(localPos.x, -_halfTrackWidth, _halfTrackWidth);
+            t.localPosition = localPos;
         }
     }
 }
