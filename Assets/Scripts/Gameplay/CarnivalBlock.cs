@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 namespace GGJ2026.Gameplay
 {
     [DisallowMultipleComponent]
@@ -45,6 +46,10 @@ namespace GGJ2026.Gameplay
                 GameManager.Instance.FailedBlock();
 
             Destroy(gameObject);
+
+
         }
+        
+
     }
 }
