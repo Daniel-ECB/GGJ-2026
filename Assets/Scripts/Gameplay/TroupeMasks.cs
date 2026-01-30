@@ -2,6 +2,7 @@ using GGJ2026.Gameplay;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityInput = UnityEngine.Input;
+using GGJ2026.Audio;
 namespace GGJ2026.Troupe
 {
     [DisallowMultipleComponent]
@@ -21,6 +22,9 @@ namespace GGJ2026.Troupe
         private TroupeUnit _leadingUnit = default;
         [SerializeField]
         private TroupeMovement _troupeMovement = default;
+
+        [Header("Audio Layers")]
+        [SerializeField] private MusicLayerController _musicLayers;
 
         [Header("Mask Change")]
         [SerializeField]
@@ -45,6 +49,9 @@ namespace GGJ2026.Troupe
         {
             GameManager.Instance.OnPlayerMistake += OnHandlePlayerMistake;
 			_timeSinceLastChange = _changeCooldown;
+
+            // In here we could define the starting mask track sound
+            // If not the default is red, defined at MusicLayerController
         }
 
         private void Update()
@@ -86,7 +93,9 @@ namespace GGJ2026.Troupe
             {
                 _troupeUnits[i].SetMaskColor((MaskColors)colorIndex, _maskMaterialsDict[(MaskColors)colorIndex]);
             }
-
+            
+            // Change the track beat by mask, by calling MusicLayerController
+            _musicLayers?.SetMaskColor((MaskColors)colorIndex);
             _timeSinceLastChange = 0.0f;
         }
 

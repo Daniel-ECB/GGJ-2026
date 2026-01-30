@@ -7,4 +7,9 @@ namespace GGJ2026.Gameplay
         Blue = 2,
         Yellow = 3
     }
+    public enum HitOutcome
+    {
+        Ok = 0,
+        Fail = 1
+    }
 }
