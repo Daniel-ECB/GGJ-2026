@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2108993267251776024}
   - component: {fileID: 6468444757840228061}
+  - component: {fileID: 8604657820703740921}
   m_Layer: 0
   m_Name: Troupe
   m_TagString: Untagged
@@ -61,6 +62,33 @@ MonoBehaviour:
   - {fileID: 4306163180527453298}
   - {fileID: 4997753563651093051}
   - {fileID: 8872305197904577635}
+--- !u!114 &8604657820703740921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3585147856737314204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 031269dd841eedb46980343b0162a28e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TroupeMasks
+  _troupeUnits:
+  - {fileID: 5199301455892264948}
+  - {fileID: 8232012137704022569}
+  - {fileID: 4306163180527453298}
+  - {fileID: 4997753563651093051}
+  - {fileID: 8872305197904577635}
+  _maskMaterialPairs:
+  - Color: 0
+    Material: {fileID: 2100000, guid: a6c7e0da7fdf9ff44ae7d41443b455fc, type: 2}
+  - Color: 1
+    Material: {fileID: 2100000, guid: b6b9ccd2d0fb0664ab2e4b8740060c5c, type: 2}
+  - Color: 2
+    Material: {fileID: 2100000, guid: 1ae6aa1ef654e454d9102b4dbe00c0cb, type: 2}
+  - Color: 3
+    Material: {fileID: 2100000, guid: 225ac7623330ab54d8ea8cf65645dbdb, type: 2}
 --- !u!1 &3622360796368580385
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,10 +419,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2108993267251776024}
     m_Modifications:
-    - target: {fileID: 1033463386159461132, guid: a274d06d5fcfb8d4687114b7269716ac, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 1ae6aa1ef654e454d9102b4dbe00c0cb, type: 2}
     - target: {fileID: 2673158225530164596, guid: a274d06d5fcfb8d4687114b7269716ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.25
@@ -472,10 +496,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2108993267251776024}
     m_Modifications:
-    - target: {fileID: 1033463386159461132, guid: a274d06d5fcfb8d4687114b7269716ac, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 225ac7623330ab54d8ea8cf65645dbdb, type: 2}
     - target: {fileID: 2673158225530164596, guid: a274d06d5fcfb8d4687114b7269716ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.75
@@ -553,10 +573,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2108993267251776024}
     m_Modifications:
-    - target: {fileID: 1033463386159461132, guid: a274d06d5fcfb8d4687114b7269716ac, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: a6c7e0da7fdf9ff44ae7d41443b455fc, type: 2}
     - target: {fileID: 2673158225530164596, guid: a274d06d5fcfb8d4687114b7269716ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.75
@@ -634,10 +650,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2108993267251776024}
     m_Modifications:
-    - target: {fileID: 1033463386159461132, guid: a274d06d5fcfb8d4687114b7269716ac, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: b6b9ccd2d0fb0664ab2e4b8740060c5c, type: 2}
     - target: {fileID: 2673158225530164596, guid: a274d06d5fcfb8d4687114b7269716ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.25

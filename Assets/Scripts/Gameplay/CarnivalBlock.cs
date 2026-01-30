@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 namespace GGJ2026.Gameplay
 {
     [DisallowMultipleComponent]
@@ -17,13 +16,20 @@ namespace GGJ2026.Gameplay
         private MaskColors _blockColor = MaskColors.Red;
 
         private BlockState _currentBlockState = BlockState.InTransit;
+        private bool _hasBeenChecked = false;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                _currentBlockState = BlockState.Touched;
-                ShowFeedback();
+                if (other.TryGetComponent<IMaskColorReader>(out var colorReader))
+                {
+                    if (colorReader.MaskColor == _blockColor && !_hasBeenChecked)
+                    {
+                        _currentBlockState = BlockState.Touched;
+                        ShowFeedback();
+                    }
+                }
             }
         }
 
@@ -46,10 +52,6 @@ namespace GGJ2026.Gameplay
                 GameManager.Instance.FailedBlock();
 
             Destroy(gameObject);
-
-
         }
-        
-
     }
 }

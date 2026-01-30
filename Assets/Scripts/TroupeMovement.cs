@@ -17,13 +17,6 @@ namespace GGJ2026.Troupe
         [SerializeField]
         private TroupeUnit[] _troupeUnits = default;
 
-        private Transform _cachedTransform;
-
-        private void Awake()
-        {
-            _cachedTransform = transform;
-        }
-
         private void Update()
         {
             float inputX = Input.InputManager.Instance.HorizontalAxis;
@@ -34,7 +27,7 @@ namespace GGJ2026.Troupe
         private void MoveTroupe()
         {
             Vector3 movement = (Vector3.forward * _forwardMoveSpeed) * Time.deltaTime;
-            _cachedTransform.Translate(movement, Space.Self);
+            transform.Translate(movement, Space.Self);
         }
 
         private void MoveLeadingUnit(float inputX)

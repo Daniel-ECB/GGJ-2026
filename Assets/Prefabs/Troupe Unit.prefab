@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 896cfd18aaeeb7849967fc6af605d537, type: 2}
+  - {fileID: 2100000, guid: a6c7e0da7fdf9ff44ae7d41443b455fc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -159,3 +159,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ea63c74747879240802ef66da2a879f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GGJ2026.Troupe.TroupeUnit
+  _unitColor: 0
+  _unitRenderer: {fileID: 1033463386159461132}

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace GGJ2026.Gameplay
 {
     [DisallowMultipleComponent]
-    public class GameManager : Singleton<GameManager>
+    public sealed class GameManager : Singleton<GameManager>
     {
         private float _currentScore = 0.0f;
         private float _scoreMultiplier = 1.0f;
@@ -16,6 +16,27 @@ namespace GGJ2026.Gameplay
         private bool _gameEnded = false;
 
         public float CurrentScore => _currentScore;
+
+        private void Start()
+        {
+            _initialBlocks = Object.FindObjectsByType<CarnivalBlock>(FindObjectsSortMode.None).Length;
+        }
+
+        private void Update()
+        {
+            if (_gameEnded) return;
+
+            int remainingBlocks = Object.FindObjectsByType<CarnivalBlock>(FindObjectsSortMode.None)
+                                         .Count(b => b != null && b.gameObject.activeInHierarchy);
+
+            if (remainingBlocks == 0 || _lives <= 0)
+            {
+                EndGame();
+                Time.timeScale = 0f;
+                _gameEnded = true;
+                Debug.Log("Nivel terminado!");
+            }
+        }
 
         public void ApprovedBlock()
         {
@@ -44,11 +65,6 @@ namespace GGJ2026.Gameplay
             {
                 Debug.Log("Strike");
             }
-
-        }
-        private void Start()
-        {
-            _initialBlocks = Object.FindObjectsByType<CarnivalBlock>(FindObjectsSortMode.None).Length;
         }
 
         public void EndGame()
@@ -64,22 +80,5 @@ namespace GGJ2026.Gameplay
 
             Debug.Log($"Game Over, Final Score: {_currentScore}, Precision: {accuracy}%, Stars: {stars}");
         }
-
-        private void Update()
-        {
-            if (_gameEnded) return;
-
-            int remainingBlocks = Object.FindObjectsByType<CarnivalBlock>(FindObjectsSortMode.None)
-                                         .Count(b => b != null && b.gameObject.activeInHierarchy);
-
-            if (remainingBlocks == 0 || _lives <= 0)
-            {
-                EndGame();
-                Time.timeScale = 0f;
-                _gameEnded = true;
-                Debug.Log("Nivel terminado!");
-            }
-        }
-
     }
 }
