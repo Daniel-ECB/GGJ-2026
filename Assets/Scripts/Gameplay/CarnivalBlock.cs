@@ -17,16 +17,28 @@ namespace GGJ2026.Gameplay
 
         private BlockState _currentBlockState = BlockState.InTransit;
         private bool _hasBeenChecked = false;
+        private MaskColors _playerColorAtEntry;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
                 if (other.TryGetComponent<IMaskColorReader>(out var colorReader))
-                {
-                    if (colorReader.MaskColor == _blockColor && !_hasBeenChecked)
+                {                  
+                    _playerColorAtEntry = colorReader.MaskColor;
+
+                    if (!_hasBeenChecked)
                     {
-                        _currentBlockState = BlockState.Touched;
+                        if (_playerColorAtEntry == _blockColor)
+                        {
+                            _currentBlockState = BlockState.Touched;
+                        }
+                        else
+                        {
+                            _currentBlockState = BlockState.InTransit;
+                        }
+
+                        _hasBeenChecked = true;
                         ShowFeedback();
                     }
                 }

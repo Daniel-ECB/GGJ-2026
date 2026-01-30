@@ -2,6 +2,7 @@ using GGJ2026.Gameplay;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityInput = UnityEngine.Input;
+
 namespace GGJ2026.Troupe
 {
     [DisallowMultipleComponent]
@@ -37,14 +38,14 @@ namespace GGJ2026.Troupe
         {
             foreach (TroupeMaskMaterialPair pair in _maskMaterialPairs)
             {
-                _maskMaterialsDict[pair.Color] = pair.Material;          
+                _maskMaterialsDict[pair.Color] = pair.Material;
             }
         }
 
         private void Start()
         {
             GameManager.Instance.OnPlayerMistake += OnHandlePlayerMistake;
-			_timeSinceLastChange = _changeCooldown;
+            _timeSinceLastChange = _changeCooldown;
         }
 
         private void Update()
@@ -61,21 +62,18 @@ namespace GGJ2026.Troupe
                 SetMasks(_pendingColorIndex.Value);
                 _pendingColorIndex = null;
             }
-
         }
 
         public void TrySetMasks(int colorIndex)
         {
             if (_timeSinceLastChange < _changeCooldown)
-            {     
+            {
                 if (!_pendingColorIndex.HasValue)
                     _pendingColorIndex = colorIndex;
                 return;
             }
             SetMasks(colorIndex);
         }
-
-
 
         public void SetMasks(int colorIndex)
         {
