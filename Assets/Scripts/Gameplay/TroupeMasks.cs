@@ -14,14 +14,21 @@ namespace GGJ2026.Troupe
             public Material Material;
         }
 
+        [Header("Troupe management")]
+        [SerializeField]
+        private List<TroupeUnit> _troupeUnits = default;
+        [SerializeField]
+        private TroupeUnit _leadingUnit = default;
+        [SerializeField]
+        private TroupeMovement _troupeMovement = default;
+
+        [Header("Mask Change")]
         [SerializeField]
         private float _changeCooldown = 2.0f;
         [SerializeField]
-        private TroupeUnit[] _troupeUnits = default;
-        [SerializeField]
         private TroupeMaskMaterialPair[] _maskMaterialPairs = default;
 
-        private float _timeSinceLastChange = 0.0f;
+        private float _timeSinceLastChange = Mathf.Infinity;
         private Dictionary<MaskColors, Material> _maskMaterialsDict = new();
 
         private int? _pendingColorIndex = null;
@@ -35,8 +42,9 @@ namespace GGJ2026.Troupe
         }
 
         private void Start()
-        {           
-            _timeSinceLastChange = _changeCooldown;
+        {
+            GameManager.Instance.OnPlayerMistake += OnHandlePlayerMistake;
+			_timeSinceLastChange = _changeCooldown;
         }
 
         private void Update()
@@ -74,12 +82,27 @@ namespace GGJ2026.Troupe
             if (_timeSinceLastChange < _changeCooldown)
                 return;
 
-            for (int i = 0; i < _troupeUnits.Length; i++)
+            for (int i = 0; i < _troupeUnits.Count; i++)
             {
                 _troupeUnits[i].SetMaskColor((MaskColors)colorIndex, _maskMaterialsDict[(MaskColors)colorIndex]);
             }
 
             _timeSinceLastChange = 0.0f;
+        }
+
+        private void OnHandlePlayerMistake()
+        {
+            _leadingUnit.ReleaseUnit();
+            List<TroupeUnit> candidates = _troupeUnits.FindAll(u => u != null && u != _leadingUnit && u.gameObject.activeSelf);
+
+            if (candidates.Count == 0)
+            {
+                Debug.LogWarning("No active troupe units available to become the new leading unit.");
+                return;
+            }
+
+            _leadingUnit = candidates[Random.Range(0, candidates.Count)];
+            _troupeMovement.ChangeLeadingUnit(_leadingUnit);
         }
     }
 }

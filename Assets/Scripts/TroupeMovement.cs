@@ -15,7 +15,7 @@ namespace GGJ2026.Troupe
         [SerializeField]
         private TroupeUnit _leadingUnit = default;
         [SerializeField]
-        private TroupeUnit[] _troupeUnits = default;
+        private Transform _leadingUnitDefaultPos;
 
         private void Update()
         {
@@ -37,6 +37,13 @@ namespace GGJ2026.Troupe
             localPos.x += inputX * _horizontalMoveSpeed * Time.deltaTime;
             localPos.x = Mathf.Clamp(localPos.x, -_halfTrackWidth, _halfTrackWidth);
             t.localPosition = localPos;
+        }
+
+        public void ChangeLeadingUnit(TroupeUnit troupeUnit)
+        {
+            _leadingUnit = troupeUnit;
+            //_leadingUnit.transform.position = _leadingUnitDefaultPos.position;
+            //_leadingUnit.MoveUnit(_leadingUnitDefaultPos.position);
         }
     }
 }
