@@ -16,7 +16,7 @@ namespace GGJ2026.Troupe
         [SerializeField]
         private float followSpeed = 6f;
         [SerializeField]
-        private float arriveEpsilon = 0.02f;
+        private float arriveEpsilon = 0.01f;
 
         private Coroutine _moveRoutine;
 
@@ -52,19 +52,19 @@ namespace GGJ2026.Troupe
 
         private IEnumerator MoveUnitRoutine(Transform destinationTransform)
         {
-            float epsSqr = arriveEpsilon * arriveEpsilon;
+            // Assumption: both this.transform and destinationTransform are under the same parent.
+            // If that's not true, see the note below.
 
             while (destinationTransform != null)
             {
-                Vector3 current = transform.position;
-                Vector3 target = destinationTransform.position;
+                Vector3 current = transform.localPosition;
+                Vector3 target = destinationTransform.localPosition;
 
-                float step = followSpeed * Time.deltaTime;
-                Vector3 next = Vector3.MoveTowards(current, target, step);
+                float maxStep = followSpeed * Time.deltaTime;
+                Vector3 next = Vector3.MoveTowards(current, target, maxStep);
+                transform.localPosition = next;
 
-                transform.position = next;
-
-                if ((target - next).sqrMagnitude <= epsSqr)
+                if ((target - next).sqrMagnitude <= arriveEpsilon * arriveEpsilon)
                     break;
 
                 yield return null;

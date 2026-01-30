@@ -43,7 +43,7 @@ namespace GGJ2026.Troupe
         {
             _leadingUnit = troupeUnit;
             //_leadingUnit.transform.position = _leadingUnitDefaultPos.position;
-            //_leadingUnit.MoveUnit(_leadingUnitDefaultPos.position);
+            _leadingUnit.MoveUnit(_leadingUnitDefaultPos);
         }
     }
 }
