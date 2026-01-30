@@ -24,7 +24,7 @@ namespace GGJ2026.Gameplay
             if (other.CompareTag(_tagToDetect))
             {
                 if (_hitControllerOwner != null)
-                    _hitControllerOwner.TakeHit();
+                    _hitControllerOwner.TakeHit(other);
             }
         }
     }

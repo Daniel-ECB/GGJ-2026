@@ -1,4 +1,6 @@
+using UnityEngine;
+
 public interface IHitController
 {
-    void TakeHit();
+    void TakeHit(Collider collider);
 }
