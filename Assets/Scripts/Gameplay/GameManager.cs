@@ -15,6 +15,8 @@ namespace GGJ2026.Gameplay
         private int _initialBlocks;
         private bool _gameEnded = false;
 
+        public event System.Action OnPlayerMistake;
+
         public float CurrentScore => _currentScore;
 
         private void Start()
@@ -59,6 +61,7 @@ namespace GGJ2026.Gameplay
             {
                 _lives--;
                 _strikes = 0;
+                OnPlayerMistake?.Invoke();
                 Debug.Log($"Vidas restantes: {_lives}");
             }
             else
