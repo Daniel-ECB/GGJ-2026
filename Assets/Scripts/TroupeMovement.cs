@@ -42,8 +42,8 @@ namespace GGJ2026.Troupe
         public void ChangeLeadingUnit(TroupeUnit troupeUnit)
         {
             _leadingUnit = troupeUnit;
-            //_leadingUnit.transform.position = _leadingUnitDefaultPos.position;
             _leadingUnit.MoveUnit(_leadingUnitDefaultPos);
+            _leadingUnit.tag = "Player";
         }
     }
 }
