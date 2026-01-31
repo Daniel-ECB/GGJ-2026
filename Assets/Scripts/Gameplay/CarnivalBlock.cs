@@ -33,12 +33,15 @@ namespace GGJ2026.Gameplay
         private bool _hasBeenChecked = false;
         private Coroutine _highlightRoutine;
         private MaskColors _playerColorAtEntry;
+        private bool _hasPlayerColorAtEntry = false;
         private Coroutine _destroyRoutine;
+        private GGJ2026.Troupe.TroupeMasks _troupeMasks;
 
         private void Awake()
         {
             ApplyMaterial();
             SetHighlightActive(false);
+            _troupeMasks = FindFirstObjectByType<GGJ2026.Troupe.TroupeMasks>();
         }
 
         private void OnValidate()
@@ -58,10 +61,11 @@ namespace GGJ2026.Gameplay
             if (_hasBeenChecked)
                 return;
 
+            _playerColorAtEntry = colorReader.MaskColor;
+            _hasPlayerColorAtEntry = true;
+
             if (colorReader.MaskColor == _blockColor)
             {
-                _playerColorAtEntry = colorReader.MaskColor;
-
                 if (!_hasBeenChecked)
                 {
                     if (_playerColorAtEntry == _blockColor)
@@ -171,13 +175,13 @@ namespace GGJ2026.Gameplay
             {
                 checkerBlock.PlayFor(_blockColor, HitOutcome.Ok);
                 GameManager.Instance.ApprovedBlock();
-                GameManager.Instance.NotifyBlockResolved(_blockColor, HitOutcome.Ok);
+                GameManager.Instance.NotifyBlockResolved(ResolvePlayerColor(), HitOutcome.Ok);
             }
             else if (_currentBlockState == BlockState.InTransit)
             {
                 checkerBlock.PlayFor(_blockColor, HitOutcome.Fail);
                 GameManager.Instance.FailedBlock();
-                GameManager.Instance.NotifyBlockResolved(_blockColor, HitOutcome.Fail);
+                GameManager.Instance.NotifyBlockResolved(ResolvePlayerColor(), HitOutcome.Fail);
             }
 
             DestroyWithDelay();
@@ -195,6 +199,17 @@ namespace GGJ2026.Gameplay
                 return;
 
             _destroyRoutine = StartCoroutine(DestroyRoutine());
+        }
+
+        private MaskColors ResolvePlayerColor()
+        {
+            if (_troupeMasks != null)
+                return _troupeMasks.CurrentMaskColor;
+
+            if (_hasPlayerColorAtEntry)
+                return _playerColorAtEntry;
+
+            return _blockColor;
         }
 
         private System.Collections.IEnumerator DestroyRoutine()

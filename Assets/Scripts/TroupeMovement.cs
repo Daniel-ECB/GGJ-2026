@@ -48,6 +48,8 @@ namespace GGJ2026.Troupe
         private float _initialLocalZ;
         private float _vx = 0f;
         private bool _isRunning = false;
+        private bool _wasRunningBeforePause = false;
+        private double _pausedAtDspTime = 0.0;
 
         private void Start()
         {
@@ -162,6 +164,29 @@ namespace GGJ2026.Troupe
         public void StopMovement()
         {
             _isRunning = false;
+        }
+
+        public void PauseMovement()
+        {
+            _wasRunningBeforePause = _isRunning;
+            if (!_isRunning)
+                return;
+
+            _pausedAtDspTime = AudioSettings.dspTime;
+            _isRunning = false;
+        }
+
+        public void ResumeMovement()
+        {
+            if (!_wasRunningBeforePause)
+                return;
+
+            double now = AudioSettings.dspTime;
+            double pausedDuration = now - _pausedAtDspTime;
+            if (pausedDuration < 0.0) pausedDuration = 0.0;
+
+            _dspStartTime += pausedDuration;
+            _isRunning = true;
         }
 
         /// <summary>

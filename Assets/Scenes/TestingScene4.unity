@@ -4613,6 +4613,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6426148677940116843, guid: 8436eaf5129929749b6b18eedbba8855, type: 3}
+      propertyPath: _color
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7306989146106331155, guid: 8436eaf5129929749b6b18eedbba8855, type: 3}
+      propertyPath: _color
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8336714003200412527, guid: 8436eaf5129929749b6b18eedbba8855, type: 3}
+      propertyPath: _color
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8387857123825683127, guid: 8436eaf5129929749b6b18eedbba8855, type: 3}
       propertyPath: m_Name
       value: MasksPanel

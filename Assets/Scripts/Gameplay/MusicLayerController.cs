@@ -271,5 +271,51 @@ namespace GGJ2026.Audio
                 }
             }
         }
+
+        public void PauseAll()
+        {
+            if (_baseBeat != null) _baseBeat.Pause();
+
+            if (_layers != null)
+            {
+                for (int i = 0; i < _layers.Length; i++)
+                {
+                    if (_layers[i] != null)
+                        _layers[i].Pause();
+                }
+            }
+
+            if (_sfxSources != null)
+            {
+                for (int i = 0; i < _sfxSources.Length; i++)
+                {
+                    if (_sfxSources[i] != null)
+                        _sfxSources[i].Pause();
+                }
+            }
+        }
+
+        public void UnpauseAll()
+        {
+            if (_baseBeat != null) _baseBeat.UnPause();
+
+            if (_layers != null)
+            {
+                for (int i = 0; i < _layers.Length; i++)
+                {
+                    if (_layers[i] != null)
+                        _layers[i].UnPause();
+                }
+            }
+
+            if (_sfxSources != null)
+            {
+                for (int i = 0; i < _sfxSources.Length; i++)
+                {
+                    if (_sfxSources[i] != null)
+                        _sfxSources[i].UnPause();
+                }
+            }
+        }
     }
 }
