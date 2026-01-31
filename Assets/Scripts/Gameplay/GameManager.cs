@@ -156,7 +156,8 @@ namespace GGJ2026.Gameplay
         public void BlockResolved()
         {
             _blocksResolved++;
-            Debug.Log($"Bloques resueltos: {_blocksResolved}/{spawner.NumberOfBlocks}");
+            if (spawner != null)
+                Debug.Log($"Bloques resueltos: {_blocksResolved}/{spawner.NumberOfBlocks}");
         }
 
         public void EndGame(bool victory)

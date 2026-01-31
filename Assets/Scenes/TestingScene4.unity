@@ -1387,6 +1387,7 @@ MonoBehaviour:
   _victoryTitle: Victoria!
   _defeatTitle: Derrota!
   _playerErrorCooldown: 1.25
+  spawner: {fileID: 0}
 --- !u!4 &546830994
 Transform:
   m_ObjectHideFlags: 0
@@ -2768,7 +2769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f91116d492df241bb4305689b050f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GGJ2026.UI.MaskUIController
-  _autoFindItemsInChildren: 0
+  _autoFindItemsInChildren: 1
   _items:
   - {fileID: 1093574174}
 --- !u!1 &1466446036
