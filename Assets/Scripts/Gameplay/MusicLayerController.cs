@@ -35,6 +35,12 @@ namespace GGJ2026.Audio
         [SerializeField] private float _inactiveVolume = 0.0f;
         [SerializeField] private float _crossfadeSec = 0.10f; // 100ms
 
+        [Header("Pan")]
+        [Tooltip("Stereo pan for the color layers (-1 left, 1 right).")]
+        [SerializeField] private float _layersPan = 0.8f;
+        [Tooltip("Stereo pan for quantized SFX (-1 left, 1 right).")]
+        [SerializeField] private float _sfxPan = -0.8f;
+
         private AudioSource[] _layers;
         private float[] _targetVolumes;
         private double _dspStartTime;
@@ -58,26 +64,28 @@ namespace GGJ2026.Audio
                     src.playOnAwake = false;
                     src.loop = false;
                     src.spatialBlend = 0f;
+                    src.panStereo = Mathf.Clamp(_sfxPan, -1f, 1f);
                     _sfxSources[i] = src;
                 }
             }
+
+            ApplyPanSettings();
+        }
+
+        private void OnValidate()
+        {
+            ApplyPanSettings();
         }
 
         private void Start()
         {
             StartAllSynced();
-            // Default: rojo (o el que quieras)
+            // Default: red
             SetMaskColor(GGJ2026.Gameplay.MaskColors.Red, immediate: true);
             Debug.Log($"Red isPlaying: {_redLayer.isPlaying}");
             Debug.Log($"Green isPlaying: {_greenLayer.isPlaying}");
             Debug.Log($"Blue isPlaying: {_blueLayer.isPlaying}");
             Debug.Log($"Yellow isPlaying: {_yellowLayer.isPlaying}");
-
-            // Only for testing, setting all layers active
-            _redLayer.volume = 0.5f;
-            _greenLayer.volume = 0.5f;
-            _blueLayer.volume = 0.5f;
-            _yellowLayer.volume = 0.5f;
         }
 
         private void Update()
@@ -144,6 +152,32 @@ namespace GGJ2026.Audio
         {
             // Enum: Red=0, Green=1, Blue=2, Yellow=3
             return (int)c;
+        }
+
+        private void ApplyPanSettings()
+        {
+            if (_baseBeat != null)
+                _baseBeat.panStereo = 0f;
+
+            float layersPan = Mathf.Clamp(_layersPan, -1f, 1f);
+            if (_layers != null)
+            {
+                for (int i = 0; i < _layers.Length; i++)
+                {
+                    if (_layers[i] != null)
+                        _layers[i].panStereo = layersPan;
+                }
+            }
+
+            float sfxPan = Mathf.Clamp(_sfxPan, -1f, 1f);
+            if (_sfxSources != null)
+            {
+                for (int i = 0; i < _sfxSources.Length; i++)
+                {
+                    if (_sfxSources[i] != null)
+                        _sfxSources[i].panStereo = sfxPan;
+                }
+            }
         }
 
         public void ScheduleSfxOnBeat(AudioClip clip)
