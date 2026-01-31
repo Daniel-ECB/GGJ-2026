@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityInput = UnityEngine.Input;
 using GGJ2026.Audio;
+using System;
 
 namespace GGJ2026.Troupe
 {
@@ -37,6 +38,10 @@ namespace GGJ2026.Troupe
         private Dictionary<MaskColors, Material> _maskMaterialsDict = new();
 
         private int? _pendingColorIndex = null;
+        private MaskColors _currentMaskColor = MaskColors.Red;
+
+        public event Action<MaskColors> OnMaskChanged;
+        public MaskColors CurrentMaskColor => _currentMaskColor;
 
         private void Awake()
         {
@@ -55,6 +60,8 @@ namespace GGJ2026.Troupe
             // If not the default is red, defined at MusicLayerController
             if (_musicLayers == null)
                 _musicLayers = FindFirstObjectByType<MusicLayerController>();
+
+            OnMaskChanged?.Invoke(_currentMaskColor);
         }
 
         private void Update()
@@ -89,6 +96,8 @@ namespace GGJ2026.Troupe
             if (_timeSinceLastChange < _changeCooldown)
                 return;
 
+            _currentMaskColor = (MaskColors)colorIndex;
+
             for (int i = 0; i < _troupeUnits.Count; i++)
             {
                 _troupeUnits[i].SetMaskColor((MaskColors)colorIndex, _maskMaterialsDict[(MaskColors)colorIndex]);
@@ -96,6 +105,7 @@ namespace GGJ2026.Troupe
             
             // Change the track beat by mask, by calling MusicLayerController
             _musicLayers?.SetMaskColor((MaskColors)colorIndex);
+            OnMaskChanged?.Invoke(_currentMaskColor);
             _timeSinceLastChange = 0.0f;
         }
 
@@ -110,7 +120,7 @@ namespace GGJ2026.Troupe
                 return;
             }
 
-            _leadingUnit = candidates[Random.Range(0, candidates.Count)];
+            _leadingUnit = candidates[UnityEngine.Random.Range(0, candidates.Count)];
             _troupeMovement.ChangeLeadingUnit(_leadingUnit);
         }
     }

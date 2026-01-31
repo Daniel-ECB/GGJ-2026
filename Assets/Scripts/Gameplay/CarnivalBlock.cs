@@ -18,6 +18,7 @@ namespace GGJ2026.Gameplay
         [SerializeField] private Material _blueHighlightMaterial;
         [SerializeField] private Material _yellowHighlightMaterial;
         [SerializeField] private float _highlightDuration = 0.2f;
+        [SerializeField] private float _destroyDelay = 0.2f;
 
         public enum BlockState
         {
@@ -32,6 +33,7 @@ namespace GGJ2026.Gameplay
         private bool _hasBeenChecked = false;
         private Coroutine _highlightRoutine;
         private MaskColors _playerColorAtEntry;
+        private Coroutine _destroyRoutine;
 
         private void Awake()
         {
@@ -161,7 +163,7 @@ namespace GGJ2026.Gameplay
             CheckerBlock checkerBlock = collider.GetComponent<CheckerBlock>();
             if (checkerBlock == null)
             {
-                Destroy(gameObject);
+                DestroyWithDelay();
                 return;
             }
 
@@ -169,13 +171,35 @@ namespace GGJ2026.Gameplay
             {
                 checkerBlock.PlayFor(_blockColor, HitOutcome.Ok);
                 GameManager.Instance.ApprovedBlock();
+                GameManager.Instance.NotifyBlockResolved(_blockColor, HitOutcome.Ok);
             }
             else if (_currentBlockState == BlockState.InTransit)
             {
                 checkerBlock.PlayFor(_blockColor, HitOutcome.Fail);
                 GameManager.Instance.FailedBlock();
+                GameManager.Instance.NotifyBlockResolved(_blockColor, HitOutcome.Fail);
             }
 
+            DestroyWithDelay();
+        }
+
+        private void DestroyWithDelay()
+        {
+            if (_destroyDelay <= 0f)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            if (_destroyRoutine != null)
+                return;
+
+            _destroyRoutine = StartCoroutine(DestroyRoutine());
+        }
+
+        private System.Collections.IEnumerator DestroyRoutine()
+        {
+            yield return new WaitForSeconds(_destroyDelay);
             Destroy(gameObject);
         }
     }

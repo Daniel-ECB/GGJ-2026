@@ -118,6 +118,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MaskButton
       objectReference: {fileID: 0}
+    - target: {fileID: 1080843663125843396, guid: 7a1fa078b79c677478867ec139db1d55, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f94d80b9074ae33418abf697146fa973, type: 3}
+    - target: {fileID: 3274289727117030425, guid: 7a1fa078b79c677478867ec139db1d55, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0456c321c04c3a446b9c6bcd52dab242, type: 3}
     - target: {fileID: 3881370795991216829, guid: 7a1fa078b79c677478867ec139db1d55, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -228,6 +236,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MaskButton (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1080843663125843396, guid: 7a1fa078b79c677478867ec139db1d55, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f2ba16cbd0b5378439cfeda34736f5b8, type: 3}
+    - target: {fileID: 3274289727117030425, guid: 7a1fa078b79c677478867ec139db1d55, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0456c321c04c3a446b9c6bcd52dab242, type: 3}
     - target: {fileID: 3881370795991216829, guid: 7a1fa078b79c677478867ec139db1d55, type: 3}
       propertyPath: m_Color.g
       value: 0
@@ -338,6 +354,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MaskButton (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1080843663125843396, guid: 7a1fa078b79c677478867ec139db1d55, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7f5a5eb5404269644b41c9a260976172, type: 3}
+    - target: {fileID: 3274289727117030425, guid: 7a1fa078b79c677478867ec139db1d55, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0456c321c04c3a446b9c6bcd52dab242, type: 3}
     - target: {fileID: 3881370795991216829, guid: 7a1fa078b79c677478867ec139db1d55, type: 3}
       propertyPath: m_Color.b
       value: 0.015686275
@@ -448,6 +472,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: MaskButton (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1080843663125843396, guid: 7a1fa078b79c677478867ec139db1d55, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f0277ac29eaaa0347b190234ecd88a62, type: 3}
+    - target: {fileID: 3274289727117030425, guid: 7a1fa078b79c677478867ec139db1d55, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0456c321c04c3a446b9c6bcd52dab242, type: 3}
     - target: {fileID: 3881370795991216829, guid: 7a1fa078b79c677478867ec139db1d55, type: 3}
       propertyPath: m_Color.b
       value: 0

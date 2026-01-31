@@ -28,6 +28,7 @@ namespace GGJ2026.Gameplay
         private float _playerErrorTimer = 0.0f;
 
         public event System.Action OnPlayerMistake;
+        public event System.Action<MaskColors, HitOutcome> OnBlockResolved;
 
         public float CurrentScore => _currentScore;
 
@@ -118,6 +119,11 @@ namespace GGJ2026.Gameplay
             {
                 Debug.Log("Strike");
             }
+        }
+
+        public void NotifyBlockResolved(MaskColors color, HitOutcome outcome)
+        {
+            OnBlockResolved?.Invoke(color, outcome);
         }
 
         public void EndGame()
