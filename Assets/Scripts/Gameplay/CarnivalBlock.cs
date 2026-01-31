@@ -11,6 +11,13 @@ namespace GGJ2026.Gameplay
         [SerializeField] private Material _greenMaterial;
         [SerializeField] private Material _blueMaterial;
         [SerializeField] private Material _yellowMaterial;
+        [SerializeField] private GameObject _highlightShell;
+        [SerializeField] private Renderer _highlightRenderer;
+        [SerializeField] private Material _redHighlightMaterial;
+        [SerializeField] private Material _greenHighlightMaterial;
+        [SerializeField] private Material _blueHighlightMaterial;
+        [SerializeField] private Material _yellowHighlightMaterial;
+        [SerializeField] private float _highlightDuration = 0.2f;
 
         public enum BlockState
         {
@@ -23,16 +30,19 @@ namespace GGJ2026.Gameplay
 
         private BlockState _currentBlockState = BlockState.InTransit;
         private bool _hasBeenChecked = false;
+        private Coroutine _highlightRoutine;
         private MaskColors _playerColorAtEntry;
 
         private void Awake()
         {
             ApplyMaterial();
+            SetHighlightActive(false);
         }
 
         private void OnValidate()
         {
             ApplyMaterial();
+            SetHighlightActive(false);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -79,25 +89,69 @@ namespace GGJ2026.Gameplay
             if (_renderer == null)
                 _renderer = GetComponentInChildren<Renderer>();
 
-            if (_renderer == null)
+            if (_renderer != null)
+            {
+                Material target = _blockColor switch
+                {
+                    MaskColors.Red => _redMaterial,
+                    MaskColors.Green => _greenMaterial,
+                    MaskColors.Blue => _blueMaterial,
+                    MaskColors.Yellow => _yellowMaterial,
+                    _ => null
+                };
+
+                if (target != null)
+                    _renderer.sharedMaterial = target;
+            }
+
+            ApplyHighlightMaterial();
+        }
+
+        private void ApplyHighlightMaterial()
+        {
+            if (_highlightShell == null)
+                return;
+
+            if (_highlightRenderer == null)
+                _highlightRenderer = _highlightShell.GetComponentInChildren<Renderer>();
+
+            if (_highlightRenderer == null)
                 return;
 
             Material target = _blockColor switch
             {
-                MaskColors.Red => _redMaterial,
-                MaskColors.Green => _greenMaterial,
-                MaskColors.Blue => _blueMaterial,
-                MaskColors.Yellow => _yellowMaterial,
+                MaskColors.Red => _redHighlightMaterial,
+                MaskColors.Green => _greenHighlightMaterial,
+                MaskColors.Blue => _blueHighlightMaterial,
+                MaskColors.Yellow => _yellowHighlightMaterial,
                 _ => null
             };
 
             if (target != null)
-                _renderer.sharedMaterial = target;
+                _highlightRenderer.sharedMaterial = target;
         }
 
         private void ShowCorrectTouchFeedback()
         {
-            // TODO: feedback visual (brillo, partículas, etc.)
+            if (_highlightShell == null) return;
+
+            if (_highlightRoutine != null)
+                StopCoroutine(_highlightRoutine);
+
+            _highlightRoutine = StartCoroutine(HighlightRoutine());
+        }
+
+        private System.Collections.IEnumerator HighlightRoutine()
+        {
+            SetHighlightActive(true);
+            yield return new WaitForSeconds(_highlightDuration);
+            SetHighlightActive(false);
+        }
+
+        private void SetHighlightActive(bool active)
+        {
+            if (_highlightShell != null)
+                _highlightShell.SetActive(active);
         }
 
         public void TakeHit(Collider collider)
