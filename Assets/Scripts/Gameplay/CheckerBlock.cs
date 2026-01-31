@@ -22,6 +22,9 @@ namespace GGJ2026.Gameplay
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private ColorSoundSet[] _soundSets;
         [SerializeField] private MusicLayerController _musicLayers;
+        [SerializeField] private float _playerErrorCooldown = 1.25f;
+
+        private float _playerErrorTimer = 0.0f;
 
         private void Awake()
         {
@@ -29,6 +32,16 @@ namespace GGJ2026.Gameplay
                 _musicLayers = FindFirstObjectByType<MusicLayerController>();
         }
 
+        private void Start()
+        {
+            GameManager.Instance.OnPlayerMistake += OnHandlePlayerMistake;
+        }
+
+        private void Update()
+        {
+            if (_playerErrorTimer < _playerErrorCooldown)
+                _playerErrorTimer += Time.deltaTime;
+        }
 
         public void PlayFor(MaskColors color, HitOutcome outcome)
         {
@@ -57,7 +70,8 @@ namespace GGJ2026.Gameplay
                 if (_soundSets[i].Color != color)
                     continue;
 
-                AudioClip[] pool = (outcome == HitOutcome.Ok) ? _soundSets[i].OkClips : _soundSets[i].FailClips;
+                AudioClip[] pool = (outcome == HitOutcome.Ok || _playerErrorTimer < _playerErrorCooldown) ? 
+                    _soundSets[i].OkClips : _soundSets[i].FailClips;
                 if (pool == null || pool.Length == 0)
                     return null;
 
@@ -66,6 +80,11 @@ namespace GGJ2026.Gameplay
             }
 
             return null;
+        }
+
+        private void OnHandlePlayerMistake()
+        {
+            _playerErrorTimer = 0.0f;
         }
     }
 }

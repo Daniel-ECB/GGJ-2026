@@ -7,6 +7,8 @@ namespace GGJ2026.Gameplay
     [DisallowMultipleComponent]
     public sealed class GameManager : Singleton<GameManager>
     {
+        [SerializeField] private float _playerErrorCooldown = 1.25f;
+
         private float _currentScore = 0.0f;
         private float _scoreMultiplier = 1.0f;
         private int _strikes = 0;
@@ -14,7 +16,10 @@ namespace GGJ2026.Gameplay
         private int _blocksHit = 0;  
         private int _blocksFailed = 0; 
         private bool _gameEnded = false;
+        private float _playerErrorTimer = 0.0f;
+
         public event System.Action OnPlayerMistake;
+
         public float CurrentScore => _currentScore;
 
         private void Update()
@@ -31,6 +36,9 @@ namespace GGJ2026.Gameplay
                 _gameEnded = true;
                 Debug.Log("Fin del juego!");
             }
+
+            if (_playerErrorTimer < _playerErrorCooldown)
+                _playerErrorTimer += Time.deltaTime;
         }
 
         public void ApprovedBlock()
@@ -45,6 +53,9 @@ namespace GGJ2026.Gameplay
 
         public void FailedBlock()
         {
+            if (_playerErrorTimer < _playerErrorCooldown)
+                return;
+
             _strikes++;
             _scoreMultiplier = 1.0f;
             _blocksFailed++;
@@ -53,6 +64,7 @@ namespace GGJ2026.Gameplay
 
             if (_strikes >= 2)
             {
+                _playerErrorTimer = 0.0f;
                 _lives--;
                 _strikes = 0;
                 OnPlayerMistake?.Invoke();
