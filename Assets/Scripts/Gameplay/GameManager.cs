@@ -1,11 +1,12 @@
+using GGJ2026.Audio;
 using GGJ2026.Core.Utils;
+using GGJ2026.Troupe;
 using System.Collections;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
-using GGJ2026.Audio;
-using GGJ2026.Troupe;
 
 namespace GGJ2026.Gameplay
 {
@@ -99,20 +100,13 @@ namespace GGJ2026.Gameplay
         {
             if (_gameEnded) return;
 
-            
-            if (spawner != null && spawner.FinishedSpawning && _blocksResolved >= spawner.NumberOfBlocks)
+            int remainingBlocks = Object.FindObjectsByType<CarnivalBlock>(FindObjectsSortMode.None)
+                                         .Count(b => b != null && b.gameObject.activeInHierarchy);
+
+            if (remainingBlocks == 0 || _lives <= 0)
             {
                 bool victory = remainingBlocks == 0 && _lives > 0;
                 EndGame(victory);
-            }
-
-            
-            if (_lives <= 0)
-            {
-                EndGame();
-                Time.timeScale = 0f;
-                _gameEnded = true;
-                Debug.Log("Fin del juego por vidas!");
             }
 
             if (_playerErrorTimer < _playerErrorCooldown)
