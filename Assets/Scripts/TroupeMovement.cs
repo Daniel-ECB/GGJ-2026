@@ -7,7 +7,6 @@ namespace GGJ2026.Troupe
     public sealed class TroupeMovement : MonoBehaviour
     {
         [Header("Movement")]
-        
         [SerializeField]
         private float _forwardMoveSpeed = 1.5f;
 
@@ -34,6 +33,9 @@ namespace GGJ2026.Troupe
         private Transform _leadingUnitDefaultPos;
 
         [Header("Audio Sync (Forward Movement)")]
+        [SerializeField]
+        private bool _autoStart = true;
+
         [Tooltip("If true, forward movement is driven by AudioSettings.dspTime to avoid drift.")]
         [SerializeField]
         private bool _useDspTimeForForward = true;
@@ -45,6 +47,7 @@ namespace GGJ2026.Troupe
         private double _dspStartTime;
         private float _initialLocalZ;
         private float _vx = 0f;
+        private bool _isRunning = false;
 
         private void Start()
         {
@@ -52,11 +55,21 @@ namespace GGJ2026.Troupe
             _initialLocalZ = transform.localPosition.z;
 
             // Capture the DSP start time. Ideally this should match the moment the music is started.
-            _dspStartTime = AudioSettings.dspTime + _dspStartOffsetSeconds;
+            if (_autoStart)
+            {
+                _dspStartTime = AudioSettings.dspTime + _dspStartOffsetSeconds;
+                _isRunning = true;
+            }
+            else
+            {
+                _isRunning = false;
+            }
         }
 
         private void Update()
         {
+            if (!_isRunning) return;
+
             float inputX = Input.InputManager.Instance.HorizontalAxis;
 
             MoveTroupeForward();
@@ -92,31 +105,31 @@ namespace GGJ2026.Troupe
         {
             if (_leadingUnit == null) return;
 
-            // Deadzone para evitar jitter
+            // Deadzone to avoid jitter
             if (Mathf.Abs(inputX) < _inputDeadZone)
                 inputX = 0f;
 
             float dt = Time.deltaTime;
 
-            // Velocidad objetivo según input
+            // Target speed based on input
             float targetVx = inputX * _maxHorizontalSpeed;
 
-            // Elegimos tasa: acelera si hay input, desacelera si no hay
+            // Choose rate: accelerate if input, decelerate if not
             float rate = (inputX != 0f) ? _horizontalAccel : _horizontalDecel;
 
-            // Mover vx hacia targetVx con aceleración limitada
+            // Move vx towards targetVx with limited acceleration
             _vx = Mathf.MoveTowards(_vx, targetVx, rate * dt);
 
             Transform t = _leadingUnit.transform;
             Vector3 localPos = t.localPosition;
 
-            // Integración lateral (acá el drift no importa)
+            // Lateral integration
             localPos.x += _vx * dt;
 
             // Clamp
             localPos.x = Mathf.Clamp(localPos.x, -_halfTrackWidth, _halfTrackWidth);
 
-            // Si chocás contra el borde, cortá velocidad para no “pegarse”
+            // If we hit the edge, zero velocity to avoid sticking
             if (localPos.x <= -_halfTrackWidth + 0.0001f || localPos.x >= _halfTrackWidth - 0.0001f)
                 _vx = 0f;
 
@@ -131,6 +144,19 @@ namespace GGJ2026.Troupe
             _leadingUnit = troupeUnit;
             _leadingUnit.MoveUnit(_leadingUnitDefaultPos);
             _leadingUnit.tag = "Player";
+        }
+
+        public void BeginAtDspTime(double dspStartTime)
+        {
+            _initialLocalZ = transform.localPosition.z;
+            _dspStartTime = dspStartTime + _dspStartOffsetSeconds;
+            _isRunning = true;
+        }
+
+        public void DisableAutoStart()
+        {
+            _autoStart = false;
+            _isRunning = false;
         }
 
         /// <summary>

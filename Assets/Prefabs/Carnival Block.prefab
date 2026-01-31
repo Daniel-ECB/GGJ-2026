@@ -331,9 +331,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 218eacb0e3c02cd468a363bd50913340, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GGJ2026.Core.FloatAndRotate
-  _amplitude: 0.35
-  _frequency: 2
-  wobbleAmplitude: 0.1
-  wobbleFrequency: 1.5
+  _floatAmplitude: 0.35
+  _FloatFrequency: 2
+  _wobbleAmplitude: 0.1
+  _wobbleFrequency: 1.5
   maxYawAngle: 30
   rotationSpeed: 1.2

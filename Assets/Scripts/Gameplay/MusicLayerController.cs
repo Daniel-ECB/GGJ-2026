@@ -13,6 +13,7 @@ namespace GGJ2026.Audio
         [SerializeField] private AudioSource _yellowLayer;
 
         [Header("Timing")]
+        [SerializeField] private bool _autoStart = true;
         [SerializeField] private float _bpm = 110f;
         [SerializeField] private double _startDelaySec = 0.1;
         [SerializeField] private bool _useDspScheduling = true;
@@ -45,6 +46,7 @@ namespace GGJ2026.Audio
         private float[] _targetVolumes;
         private double _dspStartTime;
         private int _sfxNextIndex = 0;
+        private bool _hasStarted = false;
         private bool _isReady = false;
         private readonly List<AudioClip> _pendingSfx = new();
 
@@ -79,7 +81,8 @@ namespace GGJ2026.Audio
 
         private void Start()
         {
-            StartAllSynced();
+            if (_autoStart)
+                StartAllSynced();
             // Default: red
             SetMaskColor(GGJ2026.Gameplay.MaskColors.Red, immediate: true);
             Debug.Log($"Red isPlaying: {_redLayer.isPlaying}");
@@ -101,9 +104,13 @@ namespace GGJ2026.Audio
             }
         }
 
-        private void StartAllSynced()
+        private void StartAllSynced(double? dspStartOverride = null)
         {
-            _dspStartTime = AudioSettings.dspTime + _startDelaySec;
+            if (_hasStarted)
+                return;
+
+            _hasStarted = true;
+            _dspStartTime = dspStartOverride ?? (AudioSettings.dspTime + _startDelaySec);
 
             // Base beat
             if (_baseBeat != null)
@@ -230,6 +237,16 @@ namespace GGJ2026.Audio
             src.volume = _sfxVolume;
             src.clip = clip;
             src.PlayScheduled(scheduled);
+        }
+
+        public void StartAtDspTime(double dspStartTime)
+        {
+            StartAllSynced(dspStartTime);
+        }
+
+        public void DisableAutoStart()
+        {
+            _autoStart = false;
         }
     }
 }
