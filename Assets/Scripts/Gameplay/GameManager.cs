@@ -1,6 +1,5 @@
 using GGJ2026.Core.Utils;
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 using GGJ2026.Audio;
 using GGJ2026.Troupe;
@@ -24,6 +23,7 @@ namespace GGJ2026.Gameplay
         private int _lives = 5;
         private int _blocksHit = 0;
         private int _blocksFailed = 0;
+        private int _blocksResolved = 0;
         private bool _gameEnded = false;
         private float _playerErrorTimer = 0.0f;
 
@@ -32,54 +32,29 @@ namespace GGJ2026.Gameplay
 
         public float CurrentScore => _currentScore;
 
-        protected override void Awake()
-        {
-            base.Awake();
-
-            if (_musicLayers == null)
-                _musicLayers = FindFirstObjectByType<MusicLayerController>();
-            if (_troupeMovement == null)
-                _troupeMovement = FindFirstObjectByType<TroupeMovement>();
-
-            if (_musicLayers != null)
-                _musicLayers.DisableAutoStart();
-            if (_troupeMovement != null)
-                _troupeMovement.DisableAutoStart();
-        }
-
-        private void Start()
-        {
-            if (_autoStartRun)
-                StartCoroutine(StartRunSequence());
-        }
-
-        private IEnumerator StartRunSequence()
-        {
-            double dspStart = AudioSettings.dspTime + _startDelaySec;
-
-            if (_musicLayers != null)
-                _musicLayers.StartAtDspTime(dspStart);
-
-            if (_startDelaySec > 0f)
-                yield return new WaitForSecondsRealtime(_startDelaySec);
-
-            if (_troupeMovement != null)
-                _troupeMovement.BeginAtDspTime(dspStart);
-        }
+        [Header("Spawner Reference")]
+        [SerializeField] private Spawner spawner;
 
         private void Update()
         {
             if (_gameEnded) return;
 
-            int remainingBlocks = Object.FindObjectsByType<CarnivalBlock>(FindObjectsSortMode.None)
-                                         .Count(b => b != null && b.gameObject.activeInHierarchy);
-
-            if (remainingBlocks == 0 || _lives <= 0)
+            
+            if (spawner != null && spawner.FinishedSpawning && _blocksResolved >= spawner.NumberOfBlocks)
             {
                 EndGame();
                 Time.timeScale = 0f;
                 _gameEnded = true;
                 Debug.Log("Fin del juego!");
+            }
+
+            
+            if (_lives <= 0)
+            {
+                EndGame();
+                Time.timeScale = 0f;
+                _gameEnded = true;
+                Debug.Log("Fin del juego por vidas!");
             }
 
             if (_playerErrorTimer < _playerErrorCooldown)
@@ -124,6 +99,12 @@ namespace GGJ2026.Gameplay
         public void NotifyBlockResolved(MaskColors color, HitOutcome outcome)
         {
             OnBlockResolved?.Invoke(color, outcome);
+        }
+
+        public void BlockResolved()
+        {
+            _blocksResolved++;
+            Debug.Log($"Bloques resueltos: {_blocksResolved}/{spawner.NumberOfBlocks}");
         }
 
         public void EndGame()

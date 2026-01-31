@@ -187,6 +187,7 @@ namespace GGJ2026.Gameplay
         {
             if (_destroyDelay <= 0f)
             {
+                NotifyGameManagerResolved();
                 Destroy(gameObject);
                 return;
             }
@@ -200,7 +201,14 @@ namespace GGJ2026.Gameplay
         private System.Collections.IEnumerator DestroyRoutine()
         {
             yield return new WaitForSeconds(_destroyDelay);
+            NotifyGameManagerResolved();
             Destroy(gameObject);
+        }
+
+        private void NotifyGameManagerResolved()
+        {
+            if (GameManager.Instance != null)
+                GameManager.Instance.BlockResolved();
         }
     }
 }
