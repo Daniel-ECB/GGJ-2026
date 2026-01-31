@@ -23,13 +23,13 @@ public class GeneracionPista : MonoBehaviour
 
     public void GenerarPista()
     {
-        if (Player.transform.position.z > posZ - 100)
+        if (Player.transform.position.z > posZ - 80)
         {
             int indicePrefab = ordenGeneracion[indiceSecuencia];
 
             GameObject nueva = Instantiate(
                 calles[indicePrefab],
-                new Vector3(0, posY, posZ + 87.7f),
+                new Vector3(0, posY, posZ + 80),
                 Quaternion.identity
             );
 

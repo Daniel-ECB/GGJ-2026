@@ -14,6 +14,10 @@ namespace GGJ2026.Gameplay
 
         [SerializeField]
         private MaskColors _blockColor = MaskColors.Red;
+        [SerializeField]
+        private AudioClip _goodBlockSound = default;
+        [SerializeField]
+        private AudioClip _badBlockSound = default;
 
         private BlockState _currentBlockState = BlockState.InTransit;
         private bool _hasBeenChecked = false;
@@ -39,7 +43,7 @@ namespace GGJ2026.Gameplay
                         }
 
                         _hasBeenChecked = true;
-                        ShowFeedback();
+                        ShowCorrectTouchFeedback();
                     }
                 }
             }
@@ -51,17 +55,25 @@ namespace GGJ2026.Gameplay
             _currentBlockState = blockState;
         }
 
-        private void ShowFeedback()
+        private void ShowCorrectTouchFeedback()
         {
             // TODO: Visual or audio feedback can be implemented here
         }
 
-        public void TakeHit()
+        public void TakeHit(Collider collider)
         {
+            CheckerBlock checkerBlock = collider.GetComponent<CheckerBlock>();
+
             if (_currentBlockState == BlockState.Touched)
+            {
+                checkerBlock.PlaySound(_goodBlockSound);
                 GameManager.Instance.ApprovedBlock();
+            }
             else if (_currentBlockState == BlockState.InTransit)
+            {
+                checkerBlock.PlaySound(_badBlockSound);
                 GameManager.Instance.FailedBlock();
+            }
 
             Destroy(gameObject);
         }
