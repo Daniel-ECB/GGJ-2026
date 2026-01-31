@@ -2,6 +2,9 @@ using GGJ2026.Core.Utils;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 using GGJ2026.Audio;
 using GGJ2026.Troupe;
 
@@ -15,6 +18,18 @@ namespace GGJ2026.Gameplay
         [SerializeField] private float _startDelaySec = 1.0f;
         [SerializeField] private MusicLayerController _musicLayers;
         [SerializeField] private TroupeMovement _troupeMovement;
+
+        [Header("Game Over")]
+        [SerializeField] private GameObject _gameOverPanel;
+        [SerializeField] private TMP_Text _resultTitleText;
+        [SerializeField] private TMP_Text _finalScoreText;
+        [SerializeField] private TMP_Text _finalStarsText;
+        [SerializeField] private Button _retryButton;
+        [SerializeField] private Button _quitButton;
+        [SerializeField] private AudioSource _crashSfx;
+        [SerializeField] private string _menuSceneName = "";
+        [SerializeField] private string _victoryTitle = "Victoria!";
+        [SerializeField] private string _defeatTitle = "Derrota!";
 
         [SerializeField] private float _playerErrorCooldown = 1.25f;
 
@@ -45,6 +60,15 @@ namespace GGJ2026.Gameplay
                 _musicLayers.DisableAutoStart();
             if (_troupeMovement != null)
                 _troupeMovement.DisableAutoStart();
+
+            if (_gameOverPanel != null)
+                _gameOverPanel.SetActive(false);
+
+            if (_retryButton != null)
+                _retryButton.onClick.AddListener(Retry);
+
+            if (_quitButton != null)
+                _quitButton.onClick.AddListener(QuitToMenu);
         }
 
         private void Start()
@@ -76,10 +100,8 @@ namespace GGJ2026.Gameplay
 
             if (remainingBlocks == 0 || _lives <= 0)
             {
-                EndGame();
-                Time.timeScale = 0f;
-                _gameEnded = true;
-                Debug.Log("Fin del juego!");
+                bool victory = remainingBlocks == 0 && _lives > 0;
+                EndGame(victory);
             }
 
             if (_playerErrorTimer < _playerErrorCooldown)
@@ -126,8 +148,13 @@ namespace GGJ2026.Gameplay
             OnBlockResolved?.Invoke(color, outcome);
         }
 
-        public void EndGame()
+        public void EndGame(bool victory)
         {
+            if (_gameEnded)
+                return;
+
+            _gameEnded = true;
+
             int totalBlocks = _blocksHit + _blocksFailed;
             float accuracy = totalBlocks > 0 ? ((float)_blocksHit / totalBlocks) * 100f : 0f;
 
@@ -139,6 +166,44 @@ namespace GGJ2026.Gameplay
             else stars = 1;
 
             Debug.Log($"Game Over, Final Score: {_currentScore}, Precision: {accuracy}%, Stars: {stars}");
+
+            if (_troupeMovement != null)
+                _troupeMovement.StopMovement();
+
+            if (_musicLayers != null)
+                _musicLayers.StopAll();
+
+            if (_crashSfx != null)
+                _crashSfx.Play();
+
+            if (_resultTitleText != null)
+                _resultTitleText.text = victory ? _victoryTitle : _defeatTitle;
+
+            if (_finalScoreText != null)
+                _finalScoreText.text = $"Score: {Mathf.RoundToInt(_currentScore)}";
+
+            if (_finalStarsText != null)
+                _finalStarsText.text = $"Stars: {stars}";
+
+            if (_gameOverPanel != null)
+                _gameOverPanel.SetActive(true);
+
+            Time.timeScale = 0f;
+        }
+
+        private void Retry()
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        private void QuitToMenu()
+        {
+            Time.timeScale = 1f;
+            if (!string.IsNullOrEmpty(_menuSceneName))
+                SceneManager.LoadScene(_menuSceneName);
+            else
+                Application.Quit();
         }
     }
 }

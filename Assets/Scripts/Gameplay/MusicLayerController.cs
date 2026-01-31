@@ -248,5 +248,28 @@ namespace GGJ2026.Audio
         {
             _autoStart = false;
         }
+
+        public void StopAll()
+        {
+            if (_baseBeat != null) _baseBeat.Stop();
+
+            if (_layers != null)
+            {
+                for (int i = 0; i < _layers.Length; i++)
+                {
+                    if (_layers[i] != null)
+                        _layers[i].Stop();
+                }
+            }
+
+            if (_sfxSources != null)
+            {
+                for (int i = 0; i < _sfxSources.Length; i++)
+                {
+                    if (_sfxSources[i] != null)
+                        _sfxSources[i].Stop();
+                }
+            }
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace GGJ2026.UI
 
         private readonly Dictionary<MaskColors, MaskUIItem> _byColor = new();
         private TroupeMasks _troupeMasks;
+        private GameManager _gameManager;
 
         private void Awake()
         {
@@ -34,12 +35,15 @@ namespace GGJ2026.UI
             }
 
             _troupeMasks = FindFirstObjectByType<TroupeMasks>();
+            _gameManager = FindFirstObjectByType<GameManager>();
         }
 
         private void OnEnable()
         {
-            if (GameManager.Instance != null)
-                GameManager.Instance.OnBlockResolved += HandleBlockResolved;
+            if (_gameManager == null)
+                _gameManager = FindFirstObjectByType<GameManager>();
+            if (_gameManager != null)
+                _gameManager.OnBlockResolved += HandleBlockResolved;
 
             if (_troupeMasks == null)
                 _troupeMasks = FindFirstObjectByType<TroupeMasks>();
@@ -56,8 +60,8 @@ namespace GGJ2026.UI
 
         private void OnDisable()
         {
-            if (GameManager.Instance != null)
-                GameManager.Instance.OnBlockResolved -= HandleBlockResolved;
+            if (_gameManager != null)
+                _gameManager.OnBlockResolved -= HandleBlockResolved;
 
             if (_troupeMasks != null)
                 _troupeMasks.OnMaskChanged -= HandleMaskChanged;

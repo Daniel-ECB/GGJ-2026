@@ -159,6 +159,11 @@ namespace GGJ2026.Troupe
             _isRunning = false;
         }
 
+        public void StopMovement()
+        {
+            _isRunning = false;
+        }
+
         /// <summary>
         /// Call this if you restart the run / song and want forward movement to realign.
         /// Useful when entering play mode without reloading the scene, or on retry.
