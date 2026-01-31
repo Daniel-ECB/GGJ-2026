@@ -15,6 +15,7 @@ public class GeneracionPista : MonoBehaviour
     [SerializeField] private int[] ordenGeneracion;
     private int indiceSecuencia = 0;
 
+
     void Update()
     {
         GenerarPista();
@@ -29,19 +30,20 @@ public class GeneracionPista : MonoBehaviour
 
             GameObject nueva = Instantiate(
                 calles[indicePrefab],
-                new Vector3(0, posY, posZ + 80),
+                new Vector3(0, posY, posZ + 95.5f),
                 Quaternion.identity
             );
 
             callesInstanciadas.Add(nueva);
 
-            posZ += 50;
+            posZ += 80;
 
             indiceSecuencia++;
 
-            // si llega al final, frena o reinicia (tu elección)
+            // si llega al final, frena o reinicia 
             if (indiceSecuencia >= ordenGeneracion.Length)
                 indiceSecuencia = 0; // o eliminar esta línea si NO querés loop
+
         }
     }
 
@@ -58,7 +60,6 @@ public class GeneracionPista : MonoBehaviour
             }
         }
     }
-
 
 }
 
