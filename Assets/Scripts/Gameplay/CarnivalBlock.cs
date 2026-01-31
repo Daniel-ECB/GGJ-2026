@@ -102,9 +102,6 @@ namespace GGJ2026.Gameplay
 
         public void TakeHit(Collider collider)
         {
-            if (_hasBeenChecked)
-                return;
-
             _hasBeenChecked = true;
 
             CheckerBlock checkerBlock = collider.GetComponent<CheckerBlock>();
