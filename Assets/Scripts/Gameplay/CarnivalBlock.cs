@@ -23,6 +23,7 @@ namespace GGJ2026.Gameplay
 
         private BlockState _currentBlockState = BlockState.InTransit;
         private bool _hasBeenChecked = false;
+        private MaskColors _playerColorAtEntry;
 
         private void Awake()
         {
@@ -47,8 +48,22 @@ namespace GGJ2026.Gameplay
 
             if (colorReader.MaskColor == _blockColor)
             {
-                _currentBlockState = BlockState.Touched;
-                ShowCorrectTouchFeedback();
+                _playerColorAtEntry = colorReader.MaskColor;
+
+                if (!_hasBeenChecked)
+                {
+                    if (_playerColorAtEntry == _blockColor)
+                    {
+                        _currentBlockState = BlockState.Touched;
+                    }
+                    else
+                    {
+                        _currentBlockState = BlockState.InTransit;
+                    }
+
+                    _hasBeenChecked = true;
+                    ShowCorrectTouchFeedback();
+                }
             }
         }
 
@@ -82,7 +97,7 @@ namespace GGJ2026.Gameplay
 
         private void ShowCorrectTouchFeedback()
         {
-            // TODO: feedback visual (brillo, partÃ­culas, etc.)
+            // TODO: feedback visual (brillo, partículas, etc.)
         }
 
         public void TakeHit(Collider collider)
