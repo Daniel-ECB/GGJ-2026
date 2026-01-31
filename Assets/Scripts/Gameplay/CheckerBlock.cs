@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using GGJ2026.Audio;
 
 namespace GGJ2026.Gameplay
 {
@@ -20,15 +21,30 @@ namespace GGJ2026.Gameplay
 
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private ColorSoundSet[] _soundSets;
+        [SerializeField] private MusicLayerController _musicLayers;
+
+        private void Awake()
+        {
+            if (_musicLayers == null)
+                _musicLayers = FindFirstObjectByType<MusicLayerController>();
+        }
+
 
         public void PlayFor(MaskColors color, HitOutcome outcome)
         {
             AudioClip clip = PickClip(color, outcome);
-            if (clip == null || _audioSource == null)
+            if (clip == null)
                 return;
 
-            // PlayOneShot evita pisar el clip actual y es m·s seguro para SFX cortos
-            _audioSource.PlayOneShot(clip);
+            if (_musicLayers != null)
+            {
+                _musicLayers.ScheduleSfxOnBeat(clip);
+                return;
+            }
+
+            // PlayOneShot evita pisar el clip actual y es m√°s seguro para SFX cortos
+            if (_audioSource != null)
+                _audioSource.PlayOneShot(clip);
         }
 
         private AudioClip PickClip(MaskColors color, HitOutcome outcome)

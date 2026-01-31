@@ -52,6 +52,8 @@ namespace GGJ2026.Troupe
 
             // In here we could define the starting mask track sound
             // If not the default is red, defined at MusicLayerController
+            if (_musicLayers == null)
+                _musicLayers = FindFirstObjectByType<MusicLayerController>();
         }
 
         private void Update()

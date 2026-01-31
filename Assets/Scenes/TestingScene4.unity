@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2368202231334962371, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b6b9ccd2d0fb0664ab2e4b8740060c5c, type: 2}
     - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2
@@ -174,6 +178,10 @@ PrefabInstance:
     - target: {fileID: 6390850006882627457, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_Name
       value: Carnival Block (32)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: _blockColor
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: _goodBlockSound
@@ -257,6 +265,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2368202231334962371, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b6b9ccd2d0fb0664ab2e4b8740060c5c, type: 2}
     - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2
@@ -304,6 +316,10 @@ PrefabInstance:
     - target: {fileID: 6390850006882627457, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_Name
       value: Carnival Block (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: _blockColor
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: _goodBlockSound
@@ -516,6 +532,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2368202231334962371, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b6b9ccd2d0fb0664ab2e4b8740060c5c, type: 2}
     - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2
@@ -563,6 +583,10 @@ PrefabInstance:
     - target: {fileID: 6390850006882627457, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_Name
       value: Carnival Block (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: _blockColor
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: _goodBlockSound
@@ -633,6 +657,71 @@ PrefabInstance:
       propertyPath: _goodBlockSound
       value: 
       objectReference: {fileID: 8300000, guid: 3790ea9a47cf66e4d90bca1a13ee70c8, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+--- !u!1001 &270196194
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390850006882627457, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_Name
+      value: Carnival Block (36)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: _goodBlockSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 47a65e183aecc4749a90132da97cc93e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -968,6 +1057,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2368202231334962371, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b6b9ccd2d0fb0664ab2e4b8740060c5c, type: 2}
     - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2
@@ -1017,6 +1110,10 @@ PrefabInstance:
       value: Carnival Block (35)
       objectReference: {fileID: 0}
     - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: _blockColor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: _goodBlockSound
       value: 
       objectReference: {fileID: 8300000, guid: 47a65e183aecc4749a90132da97cc93e, type: 3}
@@ -1033,6 +1130,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2368202231334962371, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b6b9ccd2d0fb0664ab2e4b8740060c5c, type: 2}
     - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2
@@ -1082,6 +1183,10 @@ PrefabInstance:
       value: Carnival Block (34)
       objectReference: {fileID: 0}
     - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: _blockColor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: _goodBlockSound
       value: 
       objectReference: {fileID: 8300000, guid: 4216696660c8b4b4fb5359835967fe02, type: 3}
@@ -1098,6 +1203,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2368202231334962371, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b6b9ccd2d0fb0664ab2e4b8740060c5c, type: 2}
     - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2
@@ -1145,6 +1254,10 @@ PrefabInstance:
     - target: {fileID: 6390850006882627457, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_Name
       value: Carnival Block (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: _blockColor
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: _goodBlockSound
@@ -1200,6 +1313,79 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &640711028
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2368202231334962371, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ae6aa1ef654e454d9102b4dbe00c0cb, type: 2}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 185
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390850006882627457, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_Name
+      value: Carnival Block (37)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: _blockColor
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: _goodBlockSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 47a65e183aecc4749a90132da97cc93e, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
 --- !u!1001 &665852675
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1516,6 +1702,79 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &834458989
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2368202231334962371, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ae6aa1ef654e454d9102b4dbe00c0cb, type: 2}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 190
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390850006882627457, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_Name
+      value: Carnival Block (38)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: _blockColor
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: _goodBlockSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 47a65e183aecc4749a90132da97cc93e, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
 --- !u!1001 &845980333
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1595,7 +1854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1933,9 +2192,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: c409ecd9fa5f49f49833d62fb29fca90, type: 3}
+  m_Resource: {fileID: 8300000, guid: 04351dba7d8ee8e4696d3e30be3a62a9, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2228,6 +2487,79 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+--- !u!1001 &1282697348
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2368202231334962371, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ae6aa1ef654e454d9102b4dbe00c0cb, type: 2}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 195
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6390850006882627457, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: m_Name
+      value: Carnival Block (39)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: _blockColor
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: _goodBlockSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 47a65e183aecc4749a90132da97cc93e, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
 --- !u!1001 &1316886429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2391,7 +2723,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 5fa724a7de8a2b94c87a22a3283953de, type: 3}
+  m_Resource: {fileID: 8300000, guid: 04351dba7d8ee8e4696d3e30be3a62a9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2506,7 +2838,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2565,6 +2897,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2368202231334962371, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b6b9ccd2d0fb0664ab2e4b8740060c5c, type: 2}
     - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2
@@ -2612,6 +2948,10 @@ PrefabInstance:
     - target: {fileID: 6390850006882627457, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_Name
       value: Carnival Block (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: _blockColor
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: _goodBlockSound
@@ -2937,8 +3277,16 @@ MonoBehaviour:
   _greenLayer: {fileID: 1032712114}
   _blueLayer: {fileID: 1024139100}
   _yellowLayer: {fileID: 1974771807}
+  _bpm: 110
   _startDelaySec: 0
   _useDspScheduling: 1
+  _sfxPoolSize: 4
+  _sfxVolume: 1
+  _sfxSubdivision: 1
+  _sfxMinLeadTime: 0.012
+  _sfxMaxWait: 0.09
+  _sfxTimeOffsetSec: -0.02
+  _sfxSources: []
   _activeVolume: 0.5
   _inactiveVolume: 0
   _crossfadeSec: 0.1
@@ -3106,6 +3454,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2368202231334962371, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b6b9ccd2d0fb0664ab2e4b8740060c5c, type: 2}
     - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2
@@ -3155,6 +3507,10 @@ PrefabInstance:
       value: Carnival Block (24)
       objectReference: {fileID: 0}
     - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: _blockColor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: _goodBlockSound
       value: 
       objectReference: {fileID: 8300000, guid: 5a1d9ae703d9ada4bbe8c938a7b2d548, type: 3}
@@ -3171,6 +3527,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2368202231334962371, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b6b9ccd2d0fb0664ab2e4b8740060c5c, type: 2}
     - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2
@@ -3218,6 +3578,10 @@ PrefabInstance:
     - target: {fileID: 6390850006882627457, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_Name
       value: Carnival Block (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: _blockColor
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: _goodBlockSound
@@ -3453,7 +3817,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 7971a66794a82224ba6795e82cefb54a, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3560,6 +3924,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2368202231334962371, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b6b9ccd2d0fb0664ab2e4b8740060c5c, type: 2}
     - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2
@@ -3607,6 +3975,10 @@ PrefabInstance:
     - target: {fileID: 6390850006882627457, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_Name
       value: Carnival Block (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: _blockColor
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7667794716971824210, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: _goodBlockSound
@@ -3710,7 +4082,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3891,6 +4263,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2368202231334962371, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a6c7e0da7fdf9ff44ae7d41443b455fc, type: 2}
     - target: {fileID: 6334714997001234679, guid: b08f5fae5e24cff4c8ffeea22b02da7c, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2
@@ -4219,7 +4595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2108993267251776024, guid: 1466ea014e8014e4fb9a1302686ee07e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -35.9
+      value: -36.25
       objectReference: {fileID: 0}
     - target: {fileID: 2108993267251776024, guid: 1466ea014e8014e4fb9a1302686ee07e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4545,6 +4921,10 @@ SceneRoots:
   - {fileID: 855266470}
   - {fileID: 1761789160}
   - {fileID: 1740421912}
+  - {fileID: 270196194}
+  - {fileID: 640711028}
+  - {fileID: 834458989}
+  - {fileID: 1282697348}
   - {fileID: 2018171543}
   - {fileID: 1985326784}
   - {fileID: 1563059012}

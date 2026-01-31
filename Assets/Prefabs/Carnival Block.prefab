@@ -312,3 +312,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a7b3317107714540bbb77f67a0a8b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GGJ2026.Gameplay.CarnivalBlock
+  _renderer: {fileID: 2368202231334962371}
+  _redMaterial: {fileID: 2100000, guid: a6c7e0da7fdf9ff44ae7d41443b455fc, type: 2}
+  _greenMaterial: {fileID: 2100000, guid: b6b9ccd2d0fb0664ab2e4b8740060c5c, type: 2}
+  _blueMaterial: {fileID: 2100000, guid: 1ae6aa1ef654e454d9102b4dbe00c0cb, type: 2}
+  _yellowMaterial: {fileID: 2100000, guid: 225ac7623330ab54d8ea8cf65645dbdb, type: 2}
+  _blockColor: 0
