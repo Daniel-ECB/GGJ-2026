@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 3993285730235632880}
   - component: {fileID: 3800235043921943688}
   - component: {fileID: 7667794716971824210}
+  - component: {fileID: 8328070766102581132}
   m_Layer: 0
   m_Name: Carnival Block
   m_TagString: Untagged
@@ -318,3 +319,21 @@ MonoBehaviour:
   _blueMaterial: {fileID: 2100000, guid: 1ae6aa1ef654e454d9102b4dbe00c0cb, type: 2}
   _yellowMaterial: {fileID: 2100000, guid: 225ac7623330ab54d8ea8cf65645dbdb, type: 2}
   _blockColor: 0
+--- !u!114 &8328070766102581132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6390850006882627457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 218eacb0e3c02cd468a363bd50913340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GGJ2026.Core.FloatAndRotate
+  _amplitude: 0.35
+  _frequency: 2
+  wobbleAmplitude: 0.1
+  wobbleFrequency: 1.5
+  maxYawAngle: 30
+  rotationSpeed: 1.2
