@@ -35,6 +35,42 @@ namespace GGJ2026.Gameplay
         [Header("Spawner Reference")]
         [SerializeField] private Spawner spawner;
 
+        
+        protected override void Awake()
+        {
+            base.Awake();
+
+            if (_musicLayers == null)
+                _musicLayers = FindFirstObjectByType<MusicLayerController>();
+            if (_troupeMovement == null)
+                _troupeMovement = FindFirstObjectByType<TroupeMovement>();
+
+            if (_musicLayers != null)
+                _musicLayers.DisableAutoStart();
+            if (_troupeMovement != null)
+                _troupeMovement.DisableAutoStart();
+        }
+
+        private void Start()
+        {
+            if (_autoStartRun)
+                StartCoroutine(StartRunSequence());
+        }
+
+        private IEnumerator StartRunSequence()
+        {
+            double dspStart = AudioSettings.dspTime + _startDelaySec;
+
+            if (_musicLayers != null)
+                _musicLayers.StartAtDspTime(dspStart);
+
+            if (_startDelaySec > 0f)
+                yield return new WaitForSecondsRealtime(_startDelaySec);
+
+            if (_troupeMovement != null)
+                _troupeMovement.BeginAtDspTime(dspStart);
+        }
+
         private void Update()
         {
             if (_gameEnded) return;
