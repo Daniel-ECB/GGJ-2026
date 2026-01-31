@@ -276,6 +276,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GGJ2026.Gameplay.GameManager
   _dontDestroyOnLoad: 0
+  _autoStartRun: 1
+  _startDelaySec: 1
+  _musicLayers: {fileID: 0}
+  _troupeMovement: {fileID: 0}
+  _playerErrorCooldown: 1.25
+  spawner: {fileID: 1356531220}
 --- !u!4 &546830994
 Transform:
   m_ObjectHideFlags: 0
@@ -512,6 +518,10 @@ MonoBehaviour:
   stepZ: 5
   fixedY: 0.5
   spawnInterval: 0.75
+  player: {fileID: 1934951775}
+  pausePattern:
+  - blocksBeforePause: 10
+    pauseDuration: 20
 --- !u!4 &1356531221
 Transform:
   m_ObjectHideFlags: 0
@@ -888,6 +898,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1934951775 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2108993267251776024, guid: 1466ea014e8014e4fb9a1302686ee07e, type: 3}
+  m_PrefabInstance: {fileID: 8817609318064967102}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2009275830
 GameObject:
   m_ObjectHideFlags: 0

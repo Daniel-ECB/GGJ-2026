@@ -1,6 +1,5 @@
 using GGJ2026.Core.Utils;
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -39,6 +38,7 @@ namespace GGJ2026.Gameplay
         private int _lives = 5;
         private int _blocksHit = 0;
         private int _blocksFailed = 0;
+        private int _blocksResolved = 0;
         private bool _gameEnded = false;
         private float _playerErrorTimer = 0.0f;
 
@@ -47,6 +47,10 @@ namespace GGJ2026.Gameplay
 
         public float CurrentScore => _currentScore;
 
+        [Header("Spawner Reference")]
+        [SerializeField] private Spawner spawner;
+
+        
         protected override void Awake()
         {
             base.Awake();
@@ -95,13 +99,20 @@ namespace GGJ2026.Gameplay
         {
             if (_gameEnded) return;
 
-            int remainingBlocks = Object.FindObjectsByType<CarnivalBlock>(FindObjectsSortMode.None)
-                                         .Count(b => b != null && b.gameObject.activeInHierarchy);
-
-            if (remainingBlocks == 0 || _lives <= 0)
+            
+            if (spawner != null && spawner.FinishedSpawning && _blocksResolved >= spawner.NumberOfBlocks)
             {
                 bool victory = remainingBlocks == 0 && _lives > 0;
                 EndGame(victory);
+            }
+
+            
+            if (_lives <= 0)
+            {
+                EndGame();
+                Time.timeScale = 0f;
+                _gameEnded = true;
+                Debug.Log("Fin del juego por vidas!");
             }
 
             if (_playerErrorTimer < _playerErrorCooldown)
@@ -146,6 +157,12 @@ namespace GGJ2026.Gameplay
         public void NotifyBlockResolved(MaskColors color, HitOutcome outcome)
         {
             OnBlockResolved?.Invoke(color, outcome);
+        }
+
+        public void BlockResolved()
+        {
+            _blocksResolved++;
+            Debug.Log($"Bloques resueltos: {_blocksResolved}/{spawner.NumberOfBlocks}");
         }
 
         public void EndGame(bool victory)
