@@ -1,12 +1,12 @@
+using GGJ2026.Audio;
 using GGJ2026.Core.Utils;
+using GGJ2026.Troupe;
 using System.Collections;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
-using GGJ2026.Audio;
-using GGJ2026.Troupe;
 
 namespace GGJ2026.Gameplay
 {
@@ -39,6 +39,7 @@ namespace GGJ2026.Gameplay
         private int _lives = 5;
         private int _blocksHit = 0;
         private int _blocksFailed = 0;
+        private int _blocksResolved = 0;
         private bool _gameEnded = false;
         private float _playerErrorTimer = 0.0f;
 
@@ -47,6 +48,10 @@ namespace GGJ2026.Gameplay
 
         public float CurrentScore => _currentScore;
 
+        [Header("Spawner Reference")]
+        [SerializeField] private Spawner spawner;
+
+        
         protected override void Awake()
         {
             base.Awake();
@@ -146,6 +151,12 @@ namespace GGJ2026.Gameplay
         public void NotifyBlockResolved(MaskColors color, HitOutcome outcome)
         {
             OnBlockResolved?.Invoke(color, outcome);
+        }
+
+        public void BlockResolved()
+        {
+            _blocksResolved++;
+            Debug.Log($"Bloques resueltos: {_blocksResolved}/{spawner.NumberOfBlocks}");
         }
 
         public void EndGame(bool victory)
