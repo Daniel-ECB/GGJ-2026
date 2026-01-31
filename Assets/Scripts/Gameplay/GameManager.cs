@@ -11,23 +11,16 @@ namespace GGJ2026.Gameplay
         private float _scoreMultiplier = 1.0f;
         private int _strikes = 0;
         private int _lives = 5;
-        private int _blocksHit = 0;
-        private int _initialBlocks;
+        private int _blocksHit = 0;  
+        private int _blocksFailed = 0; 
         private bool _gameEnded = false;
-
         public event System.Action OnPlayerMistake;
-
         public float CurrentScore => _currentScore;
-
-        private void Start()
-        {
-            _initialBlocks = Object.FindObjectsByType<CarnivalBlock>(FindObjectsSortMode.None).Length;
-        }
 
         private void Update()
         {
             if (_gameEnded) return;
-
+           
             int remainingBlocks = Object.FindObjectsByType<CarnivalBlock>(FindObjectsSortMode.None)
                                          .Count(b => b != null && b.gameObject.activeInHierarchy);
 
@@ -36,7 +29,7 @@ namespace GGJ2026.Gameplay
                 EndGame();
                 Time.timeScale = 0f;
                 _gameEnded = true;
-                Debug.Log("Nivel terminado!");
+                Debug.Log("Fin del juego!");
             }
         }
 
@@ -54,6 +47,7 @@ namespace GGJ2026.Gameplay
         {
             _strikes++;
             _scoreMultiplier = 1.0f;
+            _blocksFailed++;
 
             Debug.Log("Score deducted!");
 
@@ -72,7 +66,8 @@ namespace GGJ2026.Gameplay
 
         public void EndGame()
         {
-            float accuracy = _initialBlocks > 0 ? ((float)_blocksHit / _initialBlocks) * 100f : 0f;
+            int totalBlocks = _blocksHit + _blocksFailed;
+            float accuracy = totalBlocks > 0 ? ((float)_blocksHit / totalBlocks) * 100f : 0f;
 
             int stars;
             if (accuracy >= 90f) stars = 5;
