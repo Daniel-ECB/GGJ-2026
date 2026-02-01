@@ -280,6 +280,16 @@ MonoBehaviour:
   _startDelaySec: 1
   _musicLayers: {fileID: 0}
   _troupeMovement: {fileID: 0}
+  _gameOverPanel: {fileID: 0}
+  _resultTitleText: {fileID: 0}
+  _finalScoreText: {fileID: 0}
+  _finalStarsText: {fileID: 0}
+  _retryButton: {fileID: 0}
+  _quitButton: {fileID: 0}
+  _crashSfx: {fileID: 0}
+  _menuSceneName: 
+  _victoryTitle: Victoria!
+  _defeatTitle: Derrota!
   _playerErrorCooldown: 1.25
   spawner: {fileID: 1356531220}
 --- !u!4 &546830994
@@ -513,15 +523,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GGJ2026.Gameplay.BlockSpawner
   blockPrefab: {fileID: 6427542714639153531, guid: 47711e648f4b74b44b429e11b11052f3, type: 3}
-  numberOfBlocks: 20
+  numberOfBlocks: 6
   startZ: 5
   stepZ: 5
   fixedY: 0.5
   spawnInterval: 0.75
   player: {fileID: 1934951775}
-  pausePattern:
-  - blocksBeforePause: 10
-    pauseDuration: 20
+  manualMode: 0
+  manualSections:
+  - sectionName: 
+    blockCount: 0
+    pauseAfterSec: 0
+    blocks: []
 --- !u!4 &1356531221
 Transform:
   m_ObjectHideFlags: 0
