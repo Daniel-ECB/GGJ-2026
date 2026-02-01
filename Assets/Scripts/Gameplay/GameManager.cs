@@ -21,9 +21,21 @@ namespace GGJ2026.Gameplay
 
         [Header("Game Over")]
         [SerializeField] private GameObject _gameOverPanel;
+        [SerializeField] private CanvasGroup _gameOverCanvasGroup;
+        [SerializeField] private float _gameOverFadeDuration = 0.25f;
+        [SerializeField] private float _gameOverHiddenScale = 0.95f;
         [SerializeField] private TMP_Text _resultTitleText;
+        [SerializeField] private Image _resultTitleImage;
+        [SerializeField] private Sprite _victoryTitleSprite;
+        [SerializeField] private Sprite _defeatTitleSprite;
         [SerializeField] private TMP_Text _finalScoreText;
         [SerializeField] private TMP_Text _finalStarsText;
+        [SerializeField] private Image _starsImage;
+        [SerializeField] private Sprite _stars1Sprite;
+        [SerializeField] private Sprite _stars2Sprite;
+        [SerializeField] private Sprite _stars3Sprite;
+        [SerializeField] private Sprite _stars4Sprite;
+        [SerializeField] private Sprite _stars5Sprite;
         [SerializeField] private Button _retryButton;
         [SerializeField] private Button _quitButton;
         [SerializeField] private AudioSource _crashSfx;
@@ -42,6 +54,7 @@ namespace GGJ2026.Gameplay
         private int _blocksResolved = 0;
         private bool _gameEnded = false;
         private float _playerErrorTimer = 0.0f;
+        private Coroutine _gameOverFadeRoutine;
 
         public event System.Action OnPlayerMistake;
         public event System.Action<MaskColors, HitOutcome> OnBlockResolved;
@@ -67,7 +80,18 @@ namespace GGJ2026.Gameplay
                 _troupeMovement.DisableAutoStart();
 
             if (_gameOverPanel != null)
+            {
                 _gameOverPanel.SetActive(false);
+
+                if (_gameOverCanvasGroup == null)
+                    _gameOverCanvasGroup = _gameOverPanel.GetComponent<CanvasGroup>();
+                if (_gameOverCanvasGroup == null)
+                    _gameOverCanvasGroup = _gameOverPanel.AddComponent<CanvasGroup>();
+
+                _gameOverCanvasGroup.alpha = 0f;
+                _gameOverCanvasGroup.interactable = false;
+                _gameOverCanvasGroup.blocksRaycasts = false;
+            }
 
             if (_retryButton != null)
                 _retryButton.onClick.AddListener(Retry);
@@ -188,6 +212,16 @@ namespace GGJ2026.Gameplay
             if (_crashSfx != null)
                 _crashSfx.Play();
 
+            if (_resultTitleImage != null)
+            {
+                Sprite titleSprite = victory ? _victoryTitleSprite : _defeatTitleSprite;
+                if (titleSprite != null)
+                {
+                    _resultTitleImage.sprite = titleSprite;
+                    _resultTitleImage.enabled = true;
+                }
+            }
+
             if (_resultTitleText != null)
                 _resultTitleText.text = victory ? _victoryTitle : _defeatTitle;
 
@@ -197,10 +231,83 @@ namespace GGJ2026.Gameplay
             if (_finalStarsText != null)
                 _finalStarsText.text = $"Stars: {stars}";
 
+            if (_starsImage != null)
+            {
+                Sprite starsSprite = stars switch
+                {
+                    1 => _stars1Sprite,
+                    2 => _stars2Sprite,
+                    3 => _stars3Sprite,
+                    4 => _stars4Sprite,
+                    5 => _stars5Sprite,
+                    _ => null
+                };
+
+                if (starsSprite != null)
+                {
+                    _starsImage.sprite = starsSprite;
+                    _starsImage.enabled = true;
+                }
+            }
+
+            if (_gameOverPanel != null)
+                StartGameOverFade();
+
+            Time.timeScale = 0f;
+        }
+
+        private void StartGameOverFade()
+        {
+            if (_gameOverCanvasGroup == null)
+            {
+                if (_gameOverPanel != null)
+                    _gameOverPanel.SetActive(true);
+                return;
+            }
+
+            if (_gameOverFadeRoutine != null)
+                StopCoroutine(_gameOverFadeRoutine);
+
+            _gameOverFadeRoutine = StartCoroutine(GameOverFadeRoutine());
+        }
+
+        private IEnumerator GameOverFadeRoutine()
+        {
             if (_gameOverPanel != null)
                 _gameOverPanel.SetActive(true);
 
-            Time.timeScale = 0f;
+            _gameOverCanvasGroup.interactable = false;
+            _gameOverCanvasGroup.blocksRaycasts = false;
+
+            float startAlpha = _gameOverCanvasGroup.alpha;
+            float endAlpha = 1f;
+            float t = 0f;
+
+            RectTransform rt = _gameOverCanvasGroup.GetComponent<RectTransform>();
+            Vector3 startScale = rt != null ? rt.localScale : Vector3.one;
+            Vector3 endScale = Vector3.one;
+            Vector3 hiddenScale = Vector3.one * _gameOverHiddenScale;
+
+            // Ensure we start from hidden scale if currently hidden
+            if (rt != null && startAlpha <= 0f)
+                rt.localScale = hiddenScale;
+
+            while (t < _gameOverFadeDuration)
+            {
+                t += Time.unscaledDeltaTime;
+                float k = _gameOverFadeDuration <= 0f ? 1f : Mathf.Clamp01(t / _gameOverFadeDuration);
+                _gameOverCanvasGroup.alpha = Mathf.Lerp(startAlpha, endAlpha, k);
+                if (rt != null)
+                    rt.localScale = Vector3.Lerp(hiddenScale, endScale, k);
+                yield return null;
+            }
+
+            _gameOverCanvasGroup.alpha = 1f;
+            if (rt != null)
+                rt.localScale = endScale;
+
+            _gameOverCanvasGroup.interactable = true;
+            _gameOverCanvasGroup.blocksRaycasts = true;
         }
 
         private void Retry()
