@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CreditosBoton : MonoBehaviour
 {
-     //public GameObject objSelected;
+    public GameObject objSelected;
     [SerializeField] private Animator anim1;
     void Start()
     {
@@ -24,14 +24,14 @@ public class CreditosBoton : MonoBehaviour
 
     private void OnMouseOver()
     {
-        //objSelected.SetActive(true);
+        objSelected.SetActive(true);
 
-        
+
 
     }
 
     private void OnMouseExit()
     {
-        //objSelected.SetActive(false);
+        objSelected.SetActive(false);
     }
 }

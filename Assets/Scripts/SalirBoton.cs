@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SalirBoton : MonoBehaviour
 {
-    //public GameObject objSelected;
+    public GameObject objSelected;
     void Start()
     {
         
@@ -21,11 +21,11 @@ public class SalirBoton : MonoBehaviour
 
     private void OnMouseOver()
     {
-        //objSelected.SetActive(true);
+        objSelected.SetActive(true);
     }
 
     private void OnMouseExit()
     {
-        //objSelected.SetActive(false);
+        objSelected.SetActive(false);
     }
 }
