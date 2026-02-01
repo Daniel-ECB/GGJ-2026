@@ -11,6 +11,14 @@ namespace GGJ2026.Gameplay
         [SerializeField] private Material _greenMaterial;
         [SerializeField] private Material _blueMaterial;
         [SerializeField] private Material _yellowMaterial;
+        [SerializeField] private GameObject _highlightShell;
+        [SerializeField] private Renderer _highlightRenderer;
+        [SerializeField] private Material _redHighlightMaterial;
+        [SerializeField] private Material _greenHighlightMaterial;
+        [SerializeField] private Material _blueHighlightMaterial;
+        [SerializeField] private Material _yellowHighlightMaterial;
+        [SerializeField] private float _highlightDuration = 0.2f;
+        [SerializeField] private float _destroyDelay = 0.2f;
 
         public enum BlockState
         {
@@ -23,16 +31,23 @@ namespace GGJ2026.Gameplay
 
         private BlockState _currentBlockState = BlockState.InTransit;
         private bool _hasBeenChecked = false;
+        private Coroutine _highlightRoutine;
         private MaskColors _playerColorAtEntry;
+        private bool _hasPlayerColorAtEntry = false;
+        private Coroutine _destroyRoutine;
+        private GGJ2026.Troupe.TroupeMasks _troupeMasks;
 
         private void Awake()
         {
             ApplyMaterial();
+            SetHighlightActive(false);
+            _troupeMasks = FindFirstObjectByType<GGJ2026.Troupe.TroupeMasks>();
         }
 
         private void OnValidate()
         {
             ApplyMaterial();
+            SetHighlightActive(false);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -46,10 +61,11 @@ namespace GGJ2026.Gameplay
             if (_hasBeenChecked)
                 return;
 
+            _playerColorAtEntry = colorReader.MaskColor;
+            _hasPlayerColorAtEntry = true;
+
             if (colorReader.MaskColor == _blockColor)
             {
-                _playerColorAtEntry = colorReader.MaskColor;
-
                 if (!_hasBeenChecked)
                 {
                     if (_playerColorAtEntry == _blockColor)
@@ -79,25 +95,69 @@ namespace GGJ2026.Gameplay
             if (_renderer == null)
                 _renderer = GetComponentInChildren<Renderer>();
 
-            if (_renderer == null)
+            if (_renderer != null)
+            {
+                Material target = _blockColor switch
+                {
+                    MaskColors.Red => _redMaterial,
+                    MaskColors.Green => _greenMaterial,
+                    MaskColors.Blue => _blueMaterial,
+                    MaskColors.Yellow => _yellowMaterial,
+                    _ => null
+                };
+
+                if (target != null)
+                    _renderer.sharedMaterial = target;
+            }
+
+            ApplyHighlightMaterial();
+        }
+
+        private void ApplyHighlightMaterial()
+        {
+            if (_highlightShell == null)
+                return;
+
+            if (_highlightRenderer == null)
+                _highlightRenderer = _highlightShell.GetComponentInChildren<Renderer>();
+
+            if (_highlightRenderer == null)
                 return;
 
             Material target = _blockColor switch
             {
-                MaskColors.Red => _redMaterial,
-                MaskColors.Green => _greenMaterial,
-                MaskColors.Blue => _blueMaterial,
-                MaskColors.Yellow => _yellowMaterial,
+                MaskColors.Red => _redHighlightMaterial,
+                MaskColors.Green => _greenHighlightMaterial,
+                MaskColors.Blue => _blueHighlightMaterial,
+                MaskColors.Yellow => _yellowHighlightMaterial,
                 _ => null
             };
 
             if (target != null)
-                _renderer.sharedMaterial = target;
+                _highlightRenderer.sharedMaterial = target;
         }
 
         private void ShowCorrectTouchFeedback()
         {
-            // TODO: feedback visual (brillo, partículas, etc.)
+            if (_highlightShell == null) return;
+
+            if (_highlightRoutine != null)
+                StopCoroutine(_highlightRoutine);
+
+            _highlightRoutine = StartCoroutine(HighlightRoutine());
+        }
+
+        private System.Collections.IEnumerator HighlightRoutine()
+        {
+            SetHighlightActive(true);
+            yield return new WaitForSeconds(_highlightDuration);
+            SetHighlightActive(false);
+        }
+
+        private void SetHighlightActive(bool active)
+        {
+            if (_highlightShell != null)
+                _highlightShell.SetActive(active);
         }
 
         public void TakeHit(Collider collider)
@@ -107,7 +167,7 @@ namespace GGJ2026.Gameplay
             CheckerBlock checkerBlock = collider.GetComponent<CheckerBlock>();
             if (checkerBlock == null)
             {
-                Destroy(gameObject);
+                DestroyWithDelay();
                 return;
             }
 
@@ -115,14 +175,55 @@ namespace GGJ2026.Gameplay
             {
                 checkerBlock.PlayFor(_blockColor, HitOutcome.Ok);
                 GameManager.Instance.ApprovedBlock();
+                GameManager.Instance.NotifyBlockResolved(ResolvePlayerColor(), HitOutcome.Ok);
             }
             else if (_currentBlockState == BlockState.InTransit)
             {
                 checkerBlock.PlayFor(_blockColor, HitOutcome.Fail);
                 GameManager.Instance.FailedBlock();
+                GameManager.Instance.NotifyBlockResolved(ResolvePlayerColor(), HitOutcome.Fail);
             }
 
+            DestroyWithDelay();
+        }
+
+        private void DestroyWithDelay()
+        {
+            if (_destroyDelay <= 0f)
+            {
+                NotifyGameManagerResolved();
+                Destroy(gameObject);
+                return;
+            }
+
+            if (_destroyRoutine != null)
+                return;
+
+            _destroyRoutine = StartCoroutine(DestroyRoutine());
+        }
+
+        private MaskColors ResolvePlayerColor()
+        {
+            if (_troupeMasks != null)
+                return _troupeMasks.CurrentMaskColor;
+
+            if (_hasPlayerColorAtEntry)
+                return _playerColorAtEntry;
+
+            return _blockColor;
+        }
+
+        private System.Collections.IEnumerator DestroyRoutine()
+        {
+            yield return new WaitForSeconds(_destroyDelay);
+            NotifyGameManagerResolved();
             Destroy(gameObject);
+        }
+
+        private void NotifyGameManagerResolved()
+        {
+            if (GameManager.Instance != null)
+                GameManager.Instance.BlockResolved();
         }
     }
 }
